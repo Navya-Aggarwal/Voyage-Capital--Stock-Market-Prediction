@@ -1,0 +1,113 @@
+/* .triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-bottom: 6em solid black;
+    border-right: 18em solid transparent;
+    border-left: 18em solid transparent;
+    opacity: 0.90;
+    z-index: -1; 
+  }
+  
+  .triangle2 {
+    position:absolute;
+    margin-top: 30px;
+    width: 0;
+    height: 0;
+    vertical-align: top;
+    border-top: 6em solid black;
+    border-right: 19em solid transparent;
+    border-left: 16em solid transparent;
+    opacity: 0.90;
+    z-index: -1;  
+  }
+   */
+  header {
+    text-align: center;
+    font-family: sans-serif;  
+  }
+  
+  body {
+    text-align: center;
+    font-family: sans-serif;
+  }
+
+  #eur{
+      align-self: center;
+      size:65px;
+      text-shadow: -2px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+      color: white;
+  }
+  
+  #wrapper {
+    width: 600px;
+    margin: 0 auto;
+  }
+  
+  #currency {
+    text-shadow: -3px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    color: white;
+    font-size: 60px;
+  }
+  
+  #centerbox {
+    padding: 40px;
+  }
+  
+  #label{
+      align-self: center;
+      size:60px;
+      /* background-color: black; */
+      /* text-shadow: -2px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; */
+      color: white;
+  }
+
+  .input {
+    text-transform: uppercase;
+    padding: 11px;
+    border: solid 1px;
+    vertical-align: top;
+    align-self:center;
+  }
+  
+  .fa-arrow-right {
+    margin-top: 10px;
+  }
+  
+  button {
+      margin-top: 10px;
+      background-color:darkblue;
+      border:deepskyblue;
+      color: white;
+      padding: 10px 18px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      outline:dimgrey;
+  }
+  
+  #quote {
+    font-size:25px;
+    margin: 50px 0px -20px 0px;
+    text-shadow: -2px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    color: white;
+  }
+
+  .bg{
+    background: rgba(10, 27, 34, 0.5);
+  }
+
+  #conversion{
+      align-self: center;
+      size:65px;
+      text-shadow: -2px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+      color: white;
+  }
+
+  ul.dropdown-menu.dropdown-menu-dark.show li a {
+    text-decoration: none;
+    color: white;
+    /* margin: 0 8%; */
+}

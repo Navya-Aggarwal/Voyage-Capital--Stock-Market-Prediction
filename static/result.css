@@ -1,0 +1,150 @@
+* {
+    outline: none;
+}
+
+body {
+    background: #FAFAFA;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+    color: black;
+    font-size: 0.9rem;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    background: #FAFAFA;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #454545;
+    font-weight: 500;
+}
+
+h1 {
+    line-height: 40px;
+    font-size: 36px;
+    color-adjust:unset;
+    color: darkorchid;
+}
+
+h2 {
+    line-height: 36px;
+    font-size: 24px;
+}
+
+h3 {
+    line-height: 30px;
+    font-size: 21px;
+}
+
+h4 {
+    line-height: 22px;
+    font-size: 18px;
+}
+
+h5 {
+    line-height: 18px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+h6 {
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.display-5 {
+    font-size: 3rem;
+}
+
+.display-6 {
+    font-size: 36px;
+}
+
+.box {
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.thumb-sm {
+    width: 35px;
+}
+
+.dib {
+    display: inline-block;
+}
+
+.media-text-right {
+    text-align: right;
+}
+
+.media-text-left {
+    text-align: left;
+}
+
+.widget-card-circle i {
+    font-size: 30px;
+    left: 0;
+    line-height: 97px;
+    right: 0;
+    text-align: center;
+}
+
+.widget-line-list li {
+    display: inline-block;
+    font-size: 1.2em;
+    line-height: 27px;
+    padding: 5px 20px 0 15px;
+}
+
+
+
+.widget-line-list li span {
+    font-size: 14px;
+}
+
+#main-wrapper {
+    width: 100%;
+}
+
+.page-wrapper {
+    background: #FAFAFA;
+    padding-bottom: 60px;
+}
+
+.container-fluid {
+    padding: 0 30px 0px;
+}
+.card {
+    margin-bottom: 20px;
+}
+
+.sales-chart img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.team-chart img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul.dropdown-menu.dropdown-menu-dark.show li a {
+    text-decoration: none;
+    color: white;
+    /* margin: 0 8%; */
+}

@@ -1,0 +1,21 @@
+body {
+    color: white;
+    font-family: sans-serif;
+  }
+  
+  #two{
+  font-weight: bold;
+  font-family: sans-serif;
+  }
+  
+  ul.dropdown-menu.dropdown-menu-dark.show li a {
+      text-decoration: none;
+      color: white;
+      overflow: visible;
+      /* margin: 0 8%; */
+  }
+
+  .navbar-nav{
+      overflow: visible;
+      zoom: 1.0;
+  }

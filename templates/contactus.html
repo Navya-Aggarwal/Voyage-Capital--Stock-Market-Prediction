@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Contact Us Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylecontact.css') }}" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='Voyage Capital-logos_black.png') }}">
+    <!--using font awesome for icons-->
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin='anonymous'></script>
+</head>
+<body>
+    <div class="header">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{{ url_for('index') }}">VOYAGE CAPITAL</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                REGISTER/LOG IN
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><a class="dropdown-item-link" href="{{ url_for( 'login' ) }}">ALREADY A USER</a></li>
+                  <li><a class="dropdown-item-link" href="{{ url_for( 'register')}}">NEW USER</a></li>
+                  <li><a class="dropdown-item-link" href="{{ url_for('index') }}">HOME PAGE</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('currencyconvert') }}">CURRENCY CONVERTOR</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('aboutus') }}">ABOUT US</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('contactus') }}">CONTACT US</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!--contact-form-container-->
+    <section id='contact'>
+        <!--social-->
+        <div class='social'>
+            <!--icons-->
+            <a href='#'><i class="fab fa-facebook"></i></a>
+            <a href='#'><i class="fab fa-twitter"></i></a>
+            <a href='#'><i class="fab fa-instagram"></i></a>    
+        </div>
+        <!--box-->
+        <div class='contact-box'>
+            <!--heading-->
+            <div class="c-heading">
+                <h1>Get In Touch</h1>
+                <p>Call or Email Us Regarding Question or Issues</p>
+            </div>
+            <!--inputs-->
+            <form action="{{ url_for('contactus') }}" method="post">
+              <div class="msg">{{ msg }}</div>
+              <div class='c-inputs'>
+                <div class="msg">{{ msg }}</div>
+                <input type="text" name="fullname" placeholder="Full Name"/>
+                <input type="email" name="email" placeholder="Example@gmail.com"/>
+                <input type="password" name="password" placeholder="Password" value="Password"/>
+                <input type="text" name="subject" placeholder="Subject"/>
+                <textarea name="message" name="message" placeholder="Write a Message" ></textarea>
+                <!--submit button-->
+                <div class="col-auto">
+                  <input type="submit" class="btn btn-primary mb-3" value="SUBMIT"></input>
+                </div>
+                <div class="msg">{{ msg }}</div>
+            </div>
+          </form>
+        </div>
+        <!--map-->
+        <div class="msg">{{ msg }}</div>
+        <div class='map'> 
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3428.293168031035!2d76.78123371497635!3d30.76635028162546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ff281cf557ef9%3A0x2497dfdff5122b78!2sPEC%20CAMPUS%2CCHANDIGARH!5e0!3m2!1sen!2sin!4v1618482001820!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>      
+        </div>
+        </section>
+</body>
+</html>

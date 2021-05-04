@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A disadvantage of being a beginner investor is the tendency to rely on anyone and everyone’s trading tips and opinions. In today’s volatile market which offers myriads of seemingly lucrative “Money Minters”, choose Voyage Capital to help you in making informed and profitable investments.">
+    <meta name="keywords" content="Stock, Prediction, Beginner">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='Voyage Capital-logos_black.png') }}">
+    <title>Voyage Capital</title>
+
+    <link href="{{ url_for('static', filename='result.css') }}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+</head>
+<body class="header-fix fix-sidebar">
+    <!-- Main wrapper  -->
+    <div id="main-wrapper">
+        <div class="header">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="{{ url_for('index') }}">VOYAGE CAPITAL</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        REGISTER/LOG IN
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                          <li><a class="dropdown-item-link" href="{{ url_for( 'login' ) }}">ALREADY A USER</a></li>
+                          <li><a class="dropdown-item-link" href="{{ url_for( 'register')}}">NEW USER</a></li>
+                          <li><a class="dropdown-item-link" href="{{ url_for('index') }}">HOME PAGE</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                      
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('currencyconvert') }}">CURRENCY CONVERTOR</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('aboutus') }}">ABOUT US</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contactus') }}">CONTACT US</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('enterticker') }}">PREDICT RESULT</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('stockpref') }}">STOCK PREFERENCES</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        </div>
+
+        <div class="page-wrapper">
+         <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <br>    
+                    <h3 class="text-primary">TODAY'S {{quote1}} STOCK DATA</h3> </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container fluid  -->
+        <div class="container-fluid">
+            <!-- Start Page Content -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-bag f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{etr1}}</h2>
+                                    <p class="m-b-0 text-white">ENTERPRISE TO REVENUE</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-comment f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{mc1}}</h2>
+                                    <p class="m-b-0 text-white">QUOTE TYPE</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-vector f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{ss1}}</h2>
+                                    <p class="m-b-0 text-white">SHARES SHORT</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-location-pin f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{mrq1}}</h2>
+                                    <p class="m-b-0 text-white">MOST RECENT QUARTER</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-comment f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{pr1}}</h2>
+                                    <p class="m-b-0 text-white">PROFIT MARGIN</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+    
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-bag f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{curr1}}</h2>
+                                    <p class="m-b-0 text-white">CURRENCY</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <br>
+            <p id="description">{{summary1}}</p>
+            <br>
+
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <br>    
+                    <h3 class="text-primary">TODAY'S {{quote2}} STOCK DATA</h3> </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container fluid  -->
+        <div class="container-fluid">
+            <!-- Start Page Content -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-bag f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{etr2}}</h2>
+                                    <p class="m-b-0 text-white">ENTERPRISE TO REVENUE</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-comment f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{mc2}}</h2>
+                                    <p class="m-b-0 text-white">QUOTE TYPE</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-vector f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{ss2}}</h2>
+                                    <p class="m-b-0 text-white">SHARES SHORT</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-location-pin f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{mrq2}}</h2>
+                                    <p class="m-b-0 text-white">MOST RECENT QUARTER</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-comment f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{pr2}}</h2>
+                                    <p class="m-b-0 text-white">PROFIT MARGIN</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+    
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-bag f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{curr2}}</h2>
+                                    <p class="m-b-0 text-white">CURRENCY</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <br>
+            <p id="description">{{summary2}}</p>
+            <br>
+
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <br>    
+                    <h3 class="text-primary">TODAY'S {{quote3}} STOCK DATA</h3> </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container fluid  -->
+        <div class="container-fluid">
+            <!-- Start Page Content -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-bag f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{etr3}}</h2>
+                                    <p class="m-b-0 text-white">ENTERPRISE TO REVENUE</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-comment f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{mc3}}</h2>
+                                    <p class="m-b-0 text-white">QUOTE TYPE</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-vector f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{ss3}}</h2>
+                                    <p class="m-b-0 text-white">SHARES SHORT</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-location-pin f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{mrq3}}</h2>
+                                    <p class="m-b-0 text-white">MOST RECENT QUARTER</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-comment f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{pr3}}</h2>
+                                    <p class="m-b-0 text-white">PROFIT MARGIN</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+    
+                    <div class="col-md-2">
+                        <div class="card bg-dark p-20">
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="ti-bag f-s-40"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2 class="color-white text-white">{{curr3}}</h2>
+                                    <p class="m-b-0 text-white">CURRENCY</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <br>
+            <p id="description">{{summary3}}</p>
+            <br>
+        <!-- footer -->
+        <div class="footer-section-area padding-top-bottom">
+            <div class="container" style="background-color: #1f2b31;">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <img  src="{{ url_for('static', filename='Voyage Capital-logos_transparent.png') }}" width=200></a>
+                        <p style="color:white;">In today’s volatile market which offers myriads of seemingly lucrative “Money Minters”, Voyage Capital helps you in making informed and profitable investments.</p>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div>
+                            <h3 style="color:white;padding-top: 20px;padding-left: 0px;">Contact Us</h3>
+                        </div>
+                        <div style="padding-top: 25px;">
+                        <ul style="color:white;">
+                            <li>Voyage Capital, PEC, Chandigarh</li>
+                            <li><i class="fa fa-envelope-o fa-2x"></i>voyage_capital@gmail.com</li>
+                            <li><i class="fa fa-phone fa-2x"></i>+91 8847390611</li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End footer -->
+        <!-- End Page wrapper  -->
+    </div>
+</body>
+</html>
