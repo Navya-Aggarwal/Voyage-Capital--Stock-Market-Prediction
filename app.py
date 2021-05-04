@@ -58,7 +58,15 @@ def index():
 @app.route('/aboutus')
 def aboutus():
    return render_template('aboutus.html')
+  
+@app.route('/faq')
+def faq():
+   return render_template('faq.html')
 
+@app.route('/forgotpassword')
+def forgotpassword():
+   return render_template('forgotpassword.html')
+  
 @app.route('/contactus', methods = ["GET","POST"])
 def contactus():
     msg=''
