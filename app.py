@@ -99,6 +99,10 @@ def contactus():
 @app.route('/result')
 def result():
    return render_template('result.html')
+ 
+@app.route('/dashfaq')
+def dashfaq():
+   return render_template('dashfaq.html')
 
 @app.route('/currencyconvert',methods = ["GET","POST"])
 def currencyconvert():
