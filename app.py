@@ -637,7 +637,7 @@ def forgotpassword():
     if request.method == 'POST':
         try:
             email = request.form['email']
-            auth.send_password_reset_email("email")
+            auth.send_password_reset_email(email)
             msg = 'Email sent, please check'
         except:
             msg = "This email has not been registered!"
