@@ -619,7 +619,7 @@ def login():
                                             mc3=str(quote_ratios3['quoteType']),mrq3=str(quote_ratios3['mostRecentQuarter']),
                                             etr3=str(quote_ratios3['enterpriseToRevenue']), summary3=str(quote_ratios3['longBusinessSummary']),
                                             ss3=str(quote_ratios3['sharesShort']),pr3=str(quote_ratios3['profitMargins']))
-            return render_template('index.html')
+            return render_template('login.html')
         else:
             msg = 'Incorrect email / password !'
     return render_template('login.html', msg = msg)
