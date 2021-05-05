@@ -33,7 +33,7 @@ app.secret_key = 'your secret key'
   
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'yourpassword'
+app.config['MYSQL_PASSWORD'] = 'nav@sql1'
 app.config['MYSQL_DB'] = 'projectlogin'
   
 mysql = MySQL(app)
@@ -52,8 +52,8 @@ def add_header(response):
     return response
  
 @app.route('/')
-def index():
-   return render_template('index.html')
+def dashboard():
+   return render_template('dashboard.html')
 
 @app.route('/aboutus')
 def aboutus():
@@ -103,6 +103,15 @@ def result():
 @app.route('/dashfaq')
 def dashfaq():
    return render_template('dashfaq.html')
+
+@app.route('/index')
+def index():
+   return render_template('index.html')
+
+
+@app.route('/dashaboutus')
+def dashaboutus():
+   return render_template('dashaboutus.html')
 
 @app.route('/currencyconvert',methods = ["GET","POST"])
 def currencyconvert():
@@ -610,7 +619,7 @@ def login():
                                             mc3=str(quote_ratios3['quoteType']),mrq3=str(quote_ratios3['mostRecentQuarter']),
                                             etr3=str(quote_ratios3['enterpriseToRevenue']), summary3=str(quote_ratios3['longBusinessSummary']),
                                             ss3=str(quote_ratios3['sharesShort']),pr3=str(quote_ratios3['profitMargins']))
-            return render_template('enterticker.html')
+            return render_template('index.html')
         else:
             msg = 'Incorrect email / password !'
     return render_template('login.html', msg = msg)
