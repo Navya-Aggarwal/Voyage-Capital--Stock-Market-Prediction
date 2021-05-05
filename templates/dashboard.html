@@ -31,21 +31,16 @@
               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                 <li><a class="dropdown-item-link" href="{{ url_for( 'login' ) }}">ALREADY A USER</a></li>
                 <li><a class="dropdown-item-link" href="{{ url_for( 'register')}}">NEW USER</a></li>
-                <li><a class="dropdown-item-link" href="{{ url_for('index') }}">HOME PAGE</a></li>
+                <li><a class="dropdown-item-link" href="{{ url_for('dashboard') }}">HOME PAGE</a></li>
               </ul>
             </li>
           </ul>
         </div>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('aboutus') }}">ABOUT US</a>
+              <a class="nav-link" href="{{ url_for('dashaboutus') }}">ABOUT US</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('dashfaq') }}">FAQ</a>
-            </li>
-          </ul>
-            <ul>
-            <li class="nav-item " >
-              <a class="nav-link text-light " href="{{ url_for('index') }}">LOG OUT</a>
             </li>
           </ul>
         </div>
