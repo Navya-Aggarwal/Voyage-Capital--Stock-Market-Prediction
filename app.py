@@ -33,7 +33,7 @@ app.secret_key = 'your secret key'
   
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Shubhi@2107'
+app.config['MYSQL_PASSWORD'] = 'yourpassword'
 app.config['MYSQL_DB'] = 'projectlogin'
   
 mysql = MySQL(app)
