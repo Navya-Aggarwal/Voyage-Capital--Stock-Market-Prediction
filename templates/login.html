@@ -15,7 +15,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('index') }}">VOYAGE CAPITAL</a>
+        <a class="navbar-brand" href="{{ url_for('dashboard') }}">VOYAGE CAPITAL</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,16 +30,16 @@
               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                 <li><a class="dropdown-item-link" href="{{ url_for( 'login' ) }}">ALREADY A USER</a></li>
                 <li><a class="dropdown-item-link" href="{{ url_for( 'register')}}">NEW USER</a></li>
-                <li><a class="dropdown-item-link" href="{{ url_for('index') }}">HOME PAGE</a></li>
+                <li><a class="dropdown-item-link" href="{{ url_for('dashboard') }}">HOME PAGE</a></li>
               </ul>
             </li>
           </ul>
         </div>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('aboutus') }}">ABOUT US</a>
+              <a class="nav-link" href="{{ url_for('dashaboutus') }}">ABOUT US</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('faq') }}">FAQ</a>
+              <a class="nav-link" href="{{ url_for('dashfaq') }}">FAQ</a>
             </li>
           </ul>
         </div>
