@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Gentium+Book+Basic:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
-    <title>insertticker</title>
+    <title>Enter Ticker</title>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -30,11 +30,7 @@
               <li><a class="dropdown-item-link" href="{{ url_for( 'register')}}">NEW USER</a></li>
               <li><a class="dropdown-item-link" href="{{ url_for('index') }}">HOME PAGE</a></li>
             </ul>
-                 <ul>
-            <li class="nav-item " >
-              <a class="nav-link text-light " href="{{ url_for('dashboard') }}">LOG OUT</a>
-            </li>
-          </ul>
+            
           </li>
         </ul>
       </div>
@@ -58,6 +54,11 @@
             <a class="nav-link" href="{{ url_for('contactus') }}">CONTACT US</a>
           </li>
         </ul>
+         <ul>
+            <li class="nav-item " >
+              <a class="nav-link text-light " href="{{ url_for('dashboard') }}">LOG OUT</a>
+            </li>
+         </ul>
       </div>
     </div>
   </nav>
