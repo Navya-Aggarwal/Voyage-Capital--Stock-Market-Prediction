@@ -14,9 +14,9 @@
     <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin='anonymous'></script>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url_for('index') }}">VOYAGE CAPITAL</a>
+      <a class="navbar-brand" href="{{ url_for('dashboard') }}">VOYAGE CAPITAL</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -31,36 +31,18 @@
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
               <li><a class="dropdown-item-link" href="{{ url_for( 'login' ) }}">ALREADY A USER</a></li>
               <li><a class="dropdown-item-link" href="{{ url_for( 'register')}}">NEW USER</a></li>
-              <li><a class="dropdown-item-link" href="{{ url_for('index') }}">HOME PAGE</a></li>
+              <li><a class="dropdown-item-link" href="{{ url_for('dashboard') }}">HOME PAGE</a></li>
             </ul>
           </li>
         </ul>
       </div>
-          
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('currencyconvert') }}">CURRENCY CONVERTOR</a>
+            <a class="nav-link" href="{{ url_for('dashaboutus') }}">ABOUT US</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('enterticker') }}">PREDICT RESULT</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('stockpref') }}">STOCK PREFERENCES</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('faq') }}">FAQ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('aboutus') }}">ABOUT US</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('contactus') }}">CONTACT US</a>
+            <a class="nav-link" href="{{ url_for('dashfaq') }}">FAQ</a>
           </li>
         </ul>
-           <ul>
-            <li class="nav-item " >
-              <a class="nav-link text-light " href="{{ url_for('dashboard') }}">LOG OUT</a>
-            </li>
-          </ul>
       </div>
     </div>
   </nav>
@@ -75,7 +57,7 @@
                     <br>
                     <p>New investors may not know about the hidden risks in many seemingly simple investment strategies. To combat this pitfall, it’s important to be as informed as possible. Through our project Voyage Capital we aim to provide investors with accurate data regarding stocks and stock market that will benefit them and help them make well informed decisions. The user is supposed to sign up through ID and password or login through existing Gmail. The site will provide information related to stocks and also offer predictions regarding stocks i.e. what is the recent trend and fluctuations in stocks. It plans to do so by analysing stock market parameters such as market Price to Book value ratio. It also provides with a news feature wherein recent news related to stocks will be given. We plan on utilizing tools such as Database Management System, Structured Query Language, Front and Back end development and machine learning. In today’s volatile market which offers myriads of seemingly lucrative “Money Minters”, choose Voyage Capital to help you in making informed and profitable investments.</p>
                     <div class="button">
-                        <a href="{{ url_for( 'index' ) }}">Go to Dashboard</a>
+                        <a href="{{ url_for( 'Dashboard' ) }}">Go to Dashboard</a>
                     </div>
                 </div>
                 <div class='social'>

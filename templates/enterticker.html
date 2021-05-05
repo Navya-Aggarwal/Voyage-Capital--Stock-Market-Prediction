@@ -30,12 +30,26 @@
               <li><a class="dropdown-item-link" href="{{ url_for( 'register')}}">NEW USER</a></li>
               <li><a class="dropdown-item-link" href="{{ url_for('index') }}">HOME PAGE</a></li>
             </ul>
+                 <ul>
+            <li class="nav-item " >
+              <a class="nav-link text-light " href="{{ url_for('dashboard') }}">LOG OUT</a>
+            </li>
+          </ul>
           </li>
         </ul>
       </div>
           
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('currencyconvert') }}">CURRENCY CONVERTOR</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('enterticker') }}">PREDICT RESULT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('stockpref') }}">STOCK PREFERENCES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('faq') }}">FAQ</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('aboutus') }}">ABOUT US</a>

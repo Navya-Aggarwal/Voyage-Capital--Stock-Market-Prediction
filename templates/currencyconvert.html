@@ -22,7 +22,7 @@
   }
   </style>
   
-    <div class="header">
+   <div class="header">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="{{ url_for('index') }}">VOYAGE CAPITAL</a>
@@ -45,6 +45,35 @@
               </li>
             </ul>
           </div>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('currencyconvert') }}">CURRENCY CONVERTOR</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('enterticker') }}">PREDICT RESULT</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('stockpref') }}">STOCK PREFERENCES</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('faq') }}">FAQ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('aboutus') }}">ABOUT US</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('contactus') }}">CONTACT US</a>
+              </li>
+            </ul>
+                 <ul>
+            <li class="nav-item " >
+              <a class="nav-link text-light " href="{{ url_for('dashboard') }}">LOG OUT</a>
+            </li>
+          </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
               
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('currencyconvert') }}">CURRENCY CONVERTOR</a>
