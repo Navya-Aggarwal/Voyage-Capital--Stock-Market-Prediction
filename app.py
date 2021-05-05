@@ -630,6 +630,18 @@ def logout():
     session.pop('id', None)
     session.pop('email', None)
     return redirect(url_for('login'))
+  
+@app.route('/forgotpassword', methods =['GET', 'POST'])
+def forgotpassword():
+    msg = 'Please enter your registered email!'
+    if request.method == 'POST':
+        try:
+            email = request.form['email']
+            auth.send_password_reset_email("email")
+            msg = 'Email sent, please check'
+        except:
+            msg = "This email has not been registered!"
+    return render_template('forgotpassword.html',msg=msg)
 
   
 @app.route('/register', methods =['GET', 'POST'])
