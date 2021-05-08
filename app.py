@@ -635,17 +635,6 @@ def login():
         else:
             msg = ("Database error - user in firebase but not in database")
     return render_template('login.html', msg = msg)
-
-@app.route('/forgotpassword', methods =['GET', 'POST'])
-def forgotpassword():
-    msg = 'Please enter your registered email!'
-    if request.method == 'POST':
-        
-        email = request.form['email']
-        auth.send_password_reset_email(email)
-        msg = 'Email sent, please check'
-        
-    return render_template('forgotpassword.html',msg=msg)
   
 @app.route('/logout')
 def logout():
