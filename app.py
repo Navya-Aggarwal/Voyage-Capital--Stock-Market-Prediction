@@ -35,6 +35,20 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'nav@sql1'
 app.config['MYSQL_DB'] = 'projectlogin'
+
+#............................firebase configuration ....................................
+firebaseConfig={
+    'apiKey': "AIzaSyASagMF4GLxT0s-wTJf72KlPe2fkgZwMDk",
+    'authDomain': "voyagecapital-f03c3.firebaseapp.com",
+    'projectId': "voyagecapital-f03c3",
+    'storageBucket': "voyagecapital-f03c3.appspot.com",
+    'messagingSenderId': "214753414293",
+    'appId': "1:214753414293:web:2c626e3b4dfff4f784df9c",
+    'measurementId': "G-C7J3L4BKR9",
+    'databaseURL': "xxxxx"
+}
+firebase = pyrebase.initialize_app(firebaseConfig)
+auth = firebase.auth()
   
 mysql = MySQL(app)
 
