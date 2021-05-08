@@ -589,6 +589,18 @@ def login():
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         email = request.form['email']
         password = request.form['password']
+        print("log in...")
+        try:
+            login=auth.sign_in_with_email_and_password(email,password)
+            verified = auth.get_account_info(login['idToken'])['users'][0]['emailVerified']
+            if not verified:
+                msg = ("Please verify your email")       #ACTUALLY PRINT THIS!!!!
+                return render_template('login.html',msg=msg)
+            print("Successful!")
+        except:
+            msg = "Invalid username or password!"   #ACTUALLY PRINT THIS!!!!
+            return render_template('login.html',msg=msg)
+
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM userdetails WHERE email = % s AND password = % s', (email, password, ))
         userdetails = cursor.fetchone()
@@ -619,9 +631,9 @@ def login():
                                             mc3=str(quote_ratios3['quoteType']),mrq3=str(quote_ratios3['mostRecentQuarter']),
                                             etr3=str(quote_ratios3['enterpriseToRevenue']), summary3=str(quote_ratios3['longBusinessSummary']),
                                             ss3=str(quote_ratios3['sharesShort']),pr3=str(quote_ratios3['profitMargins']))
-            return render_template('login.html')
+            return render_template('enterticker.html')
         else:
-            msg = 'Incorrect email / password !'
+            msg = ("Database error - user in firebase but not in database")
     return render_template('login.html', msg = msg)
   
 @app.route('/logout')
