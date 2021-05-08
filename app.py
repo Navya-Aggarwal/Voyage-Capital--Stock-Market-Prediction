@@ -685,6 +685,19 @@ def register():
         stock2=request.form['stock2']
         stock3=request.form['stock3']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        
+        #check if password has ->
+        #   1. At least 8 chars 
+                # NOT DOING ->
+                #   2. At least one numeric    
+                #   3. At least one alphabet
+                #   4. At least one uppercase
+        
+        if len(password)<8:
+            msg = "Have a password greater than 8 characters!"
+            return render_template('register.html', msg = msg)
+        
+        #register on firebase
         try:
             user = auth.create_user_with_email_and_password(email,password)
             auth.send_email_verification(user['idToken'])
