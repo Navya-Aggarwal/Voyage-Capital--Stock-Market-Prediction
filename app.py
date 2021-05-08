@@ -659,24 +659,24 @@ def register():
         stock2=request.form['stock2']
         stock3=request.form['stock3']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM userdetails WHERE email = % s', (email, ))
-        account = cursor.fetchone()
-        if account:
-            msg = 'Account already exists !'
-        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            msg = 'Invalid email address !'
-        elif not password or not email or not username:
-            msg = 'Please fill out the form !'
-        else:
-            print("TEST")
-            cursor.execute('INSERT INTO userdetails VALUES (NULL, % s, % s, % s, %s, %s, %s, %s)', (email, username, password,firstname, lastname, mobile, address))
-            mysql.connection.commit()
-            cursor.execute('INSERT INTO userstock VALUES (NULL, % s, % s, % s)', (stock1, stock2, stock3))
-            mysql.connection.commit()
-            msg = 'You have successfully registered !'
+        try:
+            user = auth.create_user_with_email_and_password(email,password)
+            auth.send_email_verification(user['idToken'])
+            print("Please go to your email to verify :)")
+            print("Done!")
+        except:
+            print("Can't do that right now")
+    
+        print("TEST")
+        cursor.execute('INSERT INTO userdetails VALUES (NULL, % s, % s, % s, %s, %s, %s, %s)', (email, username, password,firstname, lastname, mobile, address))
+        mysql.connection.commit()
+        cursor.execute('INSERT INTO userstock VALUES (NULL, % s, % s, % s)', (stock1, stock2, stock3))
+        mysql.connection.commit()
+        msg = 'You have successfully registered !'
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
     return render_template('register.html', msg = msg)
+  
 
 if __name__=="__main__":
     app.run(debug=True)
