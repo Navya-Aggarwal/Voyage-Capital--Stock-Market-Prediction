@@ -696,7 +696,11 @@ def register():
         if len(password)<8:
             msg = "Have a password greater than 8 characters!"
             return render_template('register.html', msg = msg)
-        
+          
+        if len(mobile) != 10:
+            msg = "Make sure your phone number is 10 digits long!"
+            return render_template('register.html', msg = msg)
+
         #register on firebase
         try:
             user = auth.create_user_with_email_and_password(email,password)
