@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+.wrap-login100 {
+    width: 1300px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 35px 50px 33px 95px;
+}
+
+.social{
+  text-align: center;
+  margin: 5%;
+}
+
+.social i{
+    color: gray;
+    font-size: 30px;
+    padding: 0px 10px;
+}
+.social i:hover{
+    color:#3d3d3d;
+}
+
+.fa-facebook:before {
+    content: "\f09a";
+}
