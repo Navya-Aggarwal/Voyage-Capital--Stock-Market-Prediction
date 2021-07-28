@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="{{url_for('static', filename='table.css')}}">
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='table.css')}}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='Voyage Capital-logos_black.png') }}">
     <title>Tables</title>
 </head>
 <body>
-<div class=table>
-{% for table in tables %}
-            {{titles[loop.index]}}
+<!--<div class=table>
+    {% for table in tables %}
+            <h2>{{titles[loop.index]}}</h2>
             {{ table|safe }}
-{% endfor %}
-</div>
+    {% endfor %}
+</div>-->
+<div class=page>
+    {% for table in tables %}
+      <h2>{{titles[loop.index]}}</h2>
+      {{ table|safe }}
+    {% endfor %}
+  </div>
 </body>
 </html>

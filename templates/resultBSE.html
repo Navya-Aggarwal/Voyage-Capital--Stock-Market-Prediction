@@ -172,100 +172,10 @@
                 </div>
             </div>
         </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="card bg-dark p-20">
-                        <div class="media widget-ten">
-                            <div class="media-left meida media-middle">
-                                <span><i class="ti-bag f-s-40"></i></span>
-                            </div>
-                            <div class="media-body media-text-right">
-                                <h2 class="color-white text-white">{{etr}}</h2>
-                                <p class="m-b-0 text-white">ENTERPRISE TO REVENUE</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="card bg-dark p-20">
-                        <div class="media widget-ten">
-                            <div class="media-left meida media-middle">
-                                <span><i class="ti-comment f-s-40"></i></span>
-                            </div>
-                            <div class="media-body media-text-right">
-                                <h2 class="color-white text-white">{{mc}}</h2>
-                                <p class="m-b-0 text-white">QUOTE TYPE</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="card bg-dark p-20">
-                        <div class="media widget-ten">
-                            <div class="media-left meida media-middle">
-                                <span><i class="ti-vector f-s-40"></i></span>
-                            </div>
-                            <div class="media-body media-text-right">
-                                <h2 class="color-white text-white">{{ss}}</h2>
-                                <p class="m-b-0 text-white">SHARES SHORT</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="card bg-dark p-20">
-                        <div class="media widget-ten">
-                            <div class="media-left meida media-middle">
-                                <span><i class="ti-location-pin f-s-40"></i></span>
-                            </div>
-                            <div class="media-body media-text-right">
-                                <h2 class="color-white text-white">{{mrq}}</h2>
-                                <p class="m-b-0 text-white">MOST RECENT QUARTER</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="card bg-dark p-20">
-                        <div class="media widget-ten">
-                            <div class="media-left meida media-middle">
-                                <span><i class="ti-comment f-s-40"></i></span>
-                            </div>
-                            <div class="media-body media-text-right">
-                                <h2 class="color-white text-white">{{pr}}</h2>
-                                <p class="m-b-0 text-white">PROFIT MARGIN</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="col-md-2">
-                    <div class="card bg-dark p-20">
-                        <div class="media widget-ten">
-                            <div class="media-left meida media-middle">
-                                <span><i class="ti-bag f-s-40"></i></span>
-                            </div>
-                            <div class="media-body media-text-right">
-                                <h2 class="color-white text-white">{{curr}}</h2>
-                                <p class="m-b-0 text-white">CURRENCY</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-        <div>
-            <br>
-            <h3><a class="table" href="{{ url_for('table') }}" target='_blank'>For detailed financial info on the company ->click here</a></div><h3>
-        </div>
-        <br>
-        <p id="description">{{summary}}</p>
-        <br>
         <div class="candlestick">
             <img src="{{url_for('static', filename='candlestick.jpg')}}" width="100%" height=auto>
         </div>
+
         <div class="text-center">
             <a class="txt2" href="{{ url_for('chart') }}" target="_blank">
               <h2>Click Here For INTERACTIVE GRAPH<h2>
@@ -285,8 +195,7 @@
                 </div>
                 <!-- /# card -->
             </div>
-            <!-- /# column -->
-
+            <!-- /# column -->        
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-title">
@@ -477,7 +386,7 @@
                                      <tr>
                                         <td>
                                             <div>
-                                                <a href="https://finance.yahoo.com/quote/{{quote}}"><img style="padding: 0px,0px,0px,0px;width:120px;height: 120px;" src="{{ url_for('static', filename='yahoo.png')}}" alt="yahoo-finance"></a>
+                                                <a href="https://finance.yahoo.com/quote/{{quote}}"><img style="padding: 0px,0px,0px,0px;width:120px;height: 120px;" src="{{ url_for('static', filename='yahoo.png')}}" alt=yahoo-finance"></a>
                                             </div>
                                         </td>
                                         <td>{% for row in forecast_set %}
