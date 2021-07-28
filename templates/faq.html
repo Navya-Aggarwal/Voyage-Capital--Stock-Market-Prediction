@@ -6,81 +6,95 @@
     <meta name="keywords" content="Frequently Asked Questions​">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Home</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='Voyage Capital-logos_black.png') }}">
+    <title>FAQ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/nicepage.css" media="screen">
 <link rel="stylesheet" href="../static/faq.css" media="screen">
-    <script class="u-script" type="text/javascript" src="../static/jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="../static/faq.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src= "{{url_for('static', filename='jquery.js')}}"defer=""></script>
+    <script class="u-script" type="text/javascript" src= "{{url_for('static', filename='faq.js')}}" defer=""></script>
     <meta name="generator" content="Nicepage 3.13.2, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-    
-    
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='font-awesome.min.css')}}">
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='animate.css')}}">
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='hamburgers.min.css')}}">
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='select2.min.css')}}">
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='util.css')}}">
+    	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
+    <!--===============================================================================================-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <!--===============================================================================================-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Orga  nization",
 		"name": "",
 		"url": "index.html",
-		"logo": "../static/VoyageCapital-logos_black.png"
+		"logo": "static/VoyageCapital-logos_black.png"
 }</script>
     <meta property="og:title" content="Home">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#478ac9">
-    <link rel="canonical" href="index.html">
+    <link rel="canonical" href="{{ url_for('index') }}">
     <meta property="og:url" content="index.html">
+    <script type="text/javascript"  src="{{url_for('static', filename='jquery.js')}}"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='faq.css')}}">
+      <link rel="stylesheet" href="{{url_for('static', filename='nicepage.css')}}">
   </head>
-  <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-74da"><div class="u-clearfix u-sheet u-sheet-1">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('index') }}">VOYAGE CAPITAL</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              REGISTER/LOG IN
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li><a class="dropdown-item-link" href="{{ url_for( 'login' ) }}">ALREADY A USER</a></li>
-                <li><a class="dropdown-item-link" href="{{ url_for( 'register')}}">NEW USER</a></li>
-                <li><a class="dropdown-item-link" href="{{ url_for('index') }}">HOME PAGE</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-            
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('currencyconvert') }}">CURRENCY CONVERTOR</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('enterticker') }}">PREDICT RESULT</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('stockpref') }}">STOCK PREFERENCES</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('faq') }}">FAQ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('aboutus') }}">ABOUT US</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('contactus') }}">CONTACT US</a>
-            </li>
-          </ul>
-		   <ul>
-            <li class="nav-item " >
-              <a class="nav-link text-light " href="{{ url_for('dashboard') }}">LOG OUT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+  <body >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+			<img src="{{url_for('static', filename='Voyage Capital-logos_black_VC.png')}}" width="50" height="40" alt="">
+		</a>
+    <a class="navbar-brand" href="{{ url_for('dashboard') }}">VOYAGE CAPITAL</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('currencyconvert') }}">CURRENCY CONVERTOR</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url_for('enterticker') }}">PREDICT RESULT</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active " href="{{ url_for('stockpref') }}" tabindex="-1" aria-disabled="true">STOCK PREFERENCES</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url_for('faq') }}" tabindex="-1" aria-disabled="true">FAQ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url_for('aboutus') }}" tabindex="-1" aria-disabled="true">ABOUT US</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active " href="{{ url_for('contactus') }}" tabindex="-1" aria-disabled="true">CONTACT US</a>
+        </li>
+
+      </ul>
+    </div>
+    <ul>
+      <li class="nav-item" style="list-style-type: none !important;">
+        <a class="nav-link active " href="{{ url_for('index') }}" tabindex="-1" aria-disabled="true" style='color: rgba(0,0,0,.9);'>LOG OUT</a>
+      </li>
+    </ul>
+  </div>
+</nav>
     <section class="u-align-center u-clearfix u-white u-section-1" id="carousel_33f6">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h5 class="u-text u-text-1">faq</h5>
@@ -97,6 +111,96 @@
                   <span class="u-text-black">The stock market is a collection of markets across the globe where traders and investors buy and sell shares of companies. Traders and investors buy and sell stocks hoping to make a profit. Some will hold stocks for years. Others will be in and out within seconds.The stock market has its own culture, and people follow market action the same way sports fans follow their favorite teams.<br>If you want to understand what’s going on and learn to trade, it’s important that you understand what other traders and investors are saying. To do that, you need to know the most common stock market terms.
                   </span>
                   <br>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="u-accordion-item u-accordion-item-5">
+            <a class="u-accordion-link u-active-custom-color-1 u-border-2 u-border-active-custom-color-1 u-border-custom-color-1 u-border-hover-custom-color-2 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-radius-50 u-text-active-white u-text-black u-text-hover-white u-white u-accordion-link-5" id="link-accordion-1fc2" aria-controls="accordion-1fc2" aria-selected="false">
+              <span class="u-accordion-link-text">Is stock market Gambling?</span><span class="u-accordion-link-icon u-icon u-icon-circle u-text-palette-1-base u-icon-5"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-d387"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-d387"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
+	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
+            </a>
+            <div class="u-accordion-pane u-container-style u-expanded-width u-accordion-pane-5" id="accordion-1fc2" aria-labelledby="link-accordion-1fc2">
+              <div class="u-container-layout u-container-layout-5">
+                <p class="u-text u-text-default u-text-7">Definitely not!<br>There are lots of fears and myths that have grown in tandem with the stock market. These myths and fears are the main reason most people never even try to start trading/investing in stock market.
+                  <br>Earning from the stock market, just like any other business faces ups and downs. That is just a part of the business and should not be seen as gambling.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="u-accordion-item u-accordion-item-5">
+            <a class="u-accordion-link u-active-custom-color-1 u-border-2 u-border-active-custom-color-1 u-border-custom-color-1 u-border-hover-custom-color-2 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-radius-50 u-text-active-white u-text-black u-text-hover-white u-white u-accordion-link-5" id="link-accordion-1fc2" aria-controls="accordion-1fc2" aria-selected="false">
+              <span class="u-accordion-link-text">Who regulates the stock market?</span><span class="u-accordion-link-icon u-icon u-icon-circle u-text-palette-1-base u-icon-5"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-d387"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-d387"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
+	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
+            </a>
+            <div class="u-accordion-pane u-container-style u-expanded-width u-accordion-pane-5" id="accordion-1fc2" aria-labelledby="link-accordion-1fc2">
+              <div class="u-container-layout u-container-layout-5">
+                <p class="u-text u-text-default u-text-7">SEBI, one of the 4 financial regulators in India, is the regulatory authority of Indian financial market. SEBI keeps a check on the stock market and enforces bye-laws to every entity of the stock market.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="u-accordion-item u-accordion-item-5">
+            <a class="u-accordion-link u-active-custom-color-1 u-border-2 u-border-active-custom-color-1 u-border-custom-color-1 u-border-hover-custom-color-2 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-radius-50 u-text-active-white u-text-black u-text-hover-white u-white u-accordion-link-5" id="link-accordion-1fc2" aria-controls="accordion-1fc2" aria-selected="false">
+              <span class="u-accordion-link-text">How to start trading in the stock market?</span><span class="u-accordion-link-icon u-icon u-icon-circle u-text-palette-1-base u-icon-5"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-d387"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-d387"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
+	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
+            </a>
+            <div class="u-accordion-pane u-container-style u-expanded-width u-accordion-pane-5" id="accordion-1fc2" aria-labelledby="link-accordion-1fc2">
+              <div class="u-container-layout u-container-layout-5">
+                <p class="u-text u-text-default u-text-7">Before even starting in the stock market, make sure that your psychological fundamentals are in the positive direction. 
+
+                  <br>Then you need to have a basic infrastructure which includes – 
+                  <br>Computer
+                  <br>Internet
+                  <br>Pan card
+                  <br>Aadhar card
+                  <br>Bank account
+                  <br>Broker
+                  <br>Some amount to start your experiments
+                  <br>A source to learn
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="u-accordion-item u-accordion-item-5">
+            <a class="u-accordion-link u-active-custom-color-1 u-border-2 u-border-active-custom-color-1 u-border-custom-color-1 u-border-hover-custom-color-2 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-radius-50 u-text-active-white u-text-black u-text-hover-white u-white u-accordion-link-5" id="link-accordion-1fc2" aria-controls="accordion-1fc2" aria-selected="false">
+              <span class="u-accordion-link-text">How to start earning in stock market?</span><span class="u-accordion-link-icon u-icon u-icon-circle u-text-palette-1-base u-icon-5"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-d387"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-d387"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
+	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
+            </a>
+            <div class="u-accordion-pane u-container-style u-expanded-width u-accordion-pane-5" id="accordion-1fc2" aria-labelledby="link-accordion-1fc2">
+              <div class="u-container-layout u-container-layout-5">
+                <p class="u-text u-text-default u-text-7">A stock broker is a gateway to the stock market. You need to open a trading and demat account from a broker. You can choose a full-service broker or a discount broker.
+
+                  <br>Make sure that you have some risk-free money. Risk-free money means that you don’t have any problem in case that money is out of your reach for some time. Start by making small trades and small earnings per month. Take leap when pro.
+                  
+                  You should also understand the basics of technical analysis.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="u-accordion-item u-accordion-item-5">
+            <a class="u-accordion-link u-active-custom-color-1 u-border-2 u-border-active-custom-color-1 u-border-custom-color-1 u-border-hover-custom-color-2 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-radius-50 u-text-active-white u-text-black u-text-hover-white u-white u-accordion-link-5" id="link-accordion-1fc2" aria-controls="accordion-1fc2" aria-selected="false">
+              <span class="u-accordion-link-text">When does stock market open?</span><span class="u-accordion-link-icon u-icon u-icon-circle u-text-palette-1-base u-icon-5"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-d387"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-d387"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
+	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
+            </a>
+            <div class="u-accordion-pane u-container-style u-expanded-width u-accordion-pane-5" id="accordion-1fc2" aria-labelledby="link-accordion-1fc2">
+              <div class="u-container-layout u-container-layout-5">
+                <p class="u-text u-text-default u-text-7">Stock markets in India open at 09:15 for trading in all scrips and close at 15:30.
+
+                <br>There is a pre-market session from 09:00 to 09:15. This pre-market session gives the time to settle-down any overwhelming market sentiment due to the overnight news. This pre-market session allows establishing the new open price for scrips.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="u-accordion-item u-accordion-item-5">
+            <a class="u-accordion-link u-active-custom-color-1 u-border-2 u-border-active-custom-color-1 u-border-custom-color-1 u-border-hover-custom-color-2 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-radius-50 u-text-active-white u-text-black u-text-hover-white u-white u-accordion-link-5" id="link-accordion-1fc2" aria-controls="accordion-1fc2" aria-selected="false">
+              <span class="u-accordion-link-text">Is investing in small caps more profitable than large caps?</span><span class="u-accordion-link-icon u-icon u-icon-circle u-text-palette-1-base u-icon-5"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-d387"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-d387"><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
+	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
+            </a>
+            <div class="u-accordion-pane u-container-style u-expanded-width u-accordion-pane-5" id="accordion-1fc2" aria-labelledby="link-accordion-1fc2">
+              <div class="u-container-layout u-container-layout-5">
+                <p class="u-text u-text-default u-text-7">Small caps companies have the caliber to grow faster compared to the large caps. There can be a number of hidden gems in the small-cap industry which might not have been discovered by the market yet. However, their true potential is still untested. On the other hand, large-cap companies have already proved their worth to the market.
+                <br>Anyways, the quality of stock is more important than the size of the company. There are a number of large-cap companies which has consistently given good returns to its shareholders. Overall, investing in small caps can be more profitable than large caps if you’re investing in right stocks. 
                 </p>
               </div>
             </div>
@@ -236,29 +340,5 @@
         </div>
       </div>
     </section>
-    
-    
-    <div class="footer-section-area padding-top-bottom">
-      <div class="container" style="background-color: #1f2b31;">
-          <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <img  src="{{ url_for('static', filename='Voyage Capital-logos_transparent.png') }}" width=200></a>
-                  <p style="color:white;">In today’s volatile market which offers myriads of seemingly lucrative “Money Minters”, Voyage Capital helps you in making informed and profitable investments.</p>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <div>
-                      <h3 style="color:white;padding-top: 20px;padding-left: 0px;">Contact Us</h3>
-                  </div>
-                  <div style="padding-top: 25px;">
-                  <ul style="color:white;">
-                      <li>Voyage Capital, PEC, Chandigarh</li>
-                      <li><i class="fa fa-envelope-o fa-2x"></i>voyage_capital@gmail.com</li>
-                      <li><i class="fa fa-phone fa-2x"></i>+91 8847390611</li>
-                  </ul>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
   </body>
 </html>

@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+.login100-form {
+    width: 290px;
+    display: block;
+    margin: 0 auto;
+}
+
+.wrap-login100
+{
+  width:75% !important;
+}
+
+#conversion{
+  font-family:  'Poppins', sans-serif;
+text-align: center;
+color: #333333;
+      align-self: center;
+      size:65px;
+      color: black;
+  }
+
+  #quote {
+    font-family: 'Poppins', sans-serif;
+color: #333333;
+    font-size:15px !important;
+    margin: 30px 0px -20px 0px;
+
+    color: black;
+  }

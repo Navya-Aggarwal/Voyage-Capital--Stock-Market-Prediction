@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
@@ -21,9 +20,17 @@ from sklearn.linear_model import LinearRegression
 from textblob import TextBlob
 import constants as ct
 from Tweet import Tweet
-import nltk
+#import nltk
 import smtplib
-nltk.download('punkt')
+import pyrebase
+import chart_studio.plotly
+import chart_studio.tools as tls
+import cufflinks as cf
+import chart_studio
+import pandas as pd
+import mplfinance as fplt
+import plotly.graph_objects as go
+#nltk.download('punkt')
   
   
 app = Flask(__name__)
@@ -36,7 +43,10 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'nav@sql1'
 app.config['MYSQL_DB'] = 'projectlogin'
 
-#............................firebase configuration ....................................
+ 
+mysql = MySQL(app)
+
+
 firebaseConfig={
     'apiKey': "AIzaSyASagMF4GLxT0s-wTJf72KlPe2fkgZwMDk",
     'authDomain': "voyagecapital-f03c3.firebaseapp.com",
@@ -49,8 +59,6 @@ firebaseConfig={
 }
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
-  
-mysql = MySQL(app)
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -66,8 +74,8 @@ def add_header(response):
     return response
  
 @app.route('/')
-def dashboard():
-   return render_template('dashboard.html')
+def index():
+   return render_template('index.html', font_url="https://fonts.googleapis.com/css2?family=Poppins&display=swap")
 
 @app.route('/aboutus')
 def aboutus():
@@ -76,10 +84,6 @@ def aboutus():
 @app.route('/faq')
 def faq():
    return render_template('faq.html')
-
-@app.route('/forgotpassword')
-def forgotpassword():
-   return render_template('forgotpassword.html')
   
 @app.route('/contactus', methods = ["GET","POST"])
 def contactus():
@@ -88,15 +92,19 @@ def contactus():
         print('post')
         fullname = request.form.get("fullname")
         email = request.form.get('email')
-        password = request.form.get('password')
         subject = request.form.get('subject')
         message = request.form.get('message')
-        def send_email(email, password, subject, message):
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('INSERT INTO messages VALUES ( NULL , (SELECT id FROM userdetails WHERE email= %s LIMIT 1) , %s , %s , % s)', (email,fullname,email,message,))
+        mysql.connection.commit()
+        message=email + "\n" +message 
+        def send_email(email, subject, message):
             try:
                 server = smtplib.SMTP('smtp.gmail.com:587')
                 server.ehlo()
                 server.starttls()
-                server.login(email, password)
+                #server.login(email, password)
+                server.login("voyagecapital04@gmail.com", "voyage@456")
                 message = 'Subject: {}\n\n{}'.format(subject, message)
                 server.sendmail("voyagecapital04@gmail.com", "voyagecapital04@gmail.com", message)
                 server.quit()
@@ -107,25 +115,30 @@ def contactus():
                 print("Email failed to send.")
                 msg="Contact process failed"
 
-        send_email(email, password, subject, message)
+        send_email(email, subject, message)
     return render_template('contactus.html', msg=msg)
 
 @app.route('/result')
 def result():
    return render_template('result.html')
+
+
+@app.route('/filtertable')
+def filtertable():
+   return render_template('filtertable.html')
  
-@app.route('/dashfaq')
-def dashfaq():
-   return render_template('dashfaq.html')
+@app.route('/indexfaq')
+def indexfaq():
+   return render_template('indexfaq.html')
 
-@app.route('/index')
-def index():
-   return render_template('index.html')
+@app.route('/dashboard')
+def dashboard():
+   return render_template('dashboard.html')
 
 
-@app.route('/dashaboutus')
-def dashaboutus():
-   return render_template('dashaboutus.html')
+@app.route('/indexaboutus')
+def indexaboutus():
+   return render_template('indexaboutus.html')
 
 @app.route('/currencyconvert',methods = ["GET","POST"])
 def currencyconvert():
@@ -144,26 +157,46 @@ def currencyconvert():
         answer = 0
     return render_template('currencyconvert.html', converted=answer)
 
+global symbol123
 @app.route('/tables', methods=("POST", "GET"))
-def table(quote):
-    print(quote)
-    df=yf.Ticker('MSFT').financials
-    df1=yf.Ticker('MSFT').recommendations
-    df2=yf.Ticker('MSFT').quarterly_balance_sheet
-    df3=yf.Ticker('MSFT').cashflow
-    df4=yf.Ticker('MSFT').earnings
-    return render_template('table.html',  tables=[df.to_html(classes='data'),df1.to_html(classes='data'),df2.to_html(classes='data'),df3.to_html(classes='data'),df4.to_html(classes='data')], 
+def table():
+    print("Done")
+    global symbol123
+    df=yf.Ticker(symbol123).financials
+    df1=yf.Ticker(symbol123).recommendations
+    df2=yf.Ticker(symbol123).quarterly_balance_sheet
+    df3=yf.Ticker(symbol123).cashflow
+    df4=yf.Ticker(symbol123).earnings
+    return render_template('table.html',  tables=[df.to_html(classes='df'),df1.to_html(classes='data'),df2.to_html(classes='data'),df3.to_html(classes='data'),df4.to_html(classes='data')], 
                             titles=['na','Financials','Recommendations','Quarterly Balance Sheet','Cashflow','Earnings'])
 
-
+global user_id123
 @app.route('/enterticker', methods =['GET', 'POST'])
 def enterticker():
     if request.method == 'POST' and 'symbol' in request.form:
         symbol = request.form['symbol']
+        try:
+            global symbol123
+            symbol123=symbol
+            global user_id123
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute('SELECT id,symbol FROM history WHERE id=%s AND symbol=%s', (user_id123,symbol))    
+            hist_done=cursor.fetchone()
+            if(hist_done==None):
+                cursor.execute('INSERT INTO history VALUES (%s,%s)', (user_id123,symbol))
+                mysql.connection.commit()
+        except:
+            msg = ("Your session has expired")
+            return render_template('login.html', msg = msg)
         def get_historical(quote):
             end = datetime.now()
             start = datetime(end.year-2,end.month,end.day)
+            print('call')
             data = yf.download(quote, start=start, end=end)
+            #data = pd.read_csv('AAPL.csv', index_col='Date', parse_dates=True)
+
+            print('call end')
+
             df = pd.DataFrame(data=data)
             df.to_csv(''+quote+'.csv')
             if(df.empty):
@@ -184,7 +217,16 @@ def enterticker():
                 df['Volume']=data['6. volume']
                 df.to_csv(''+quote+'.csv',index=False)
             return
-        
+
+        def write_file(data, filename):
+            # Convert binary data to proper format and write it on Hard Disk
+            with open(filename, 'wb') as file:
+                file.write(data)
+        def convertToBinaryData(filename):
+            # Convert digital data to binary format
+            with open(filename, 'rb') as file:
+                binaryData = file.read()
+            return binaryData
         def ARIMA_ALGO(df):
             uniqueVals = df["Code"].unique()  
             len(uniqueVals)
@@ -216,13 +258,14 @@ def enterticker():
                 plt.plot(Quantity_date)
                 plt.savefig('static/Trends.png')
                 plt.close(fig)
-        
+                trend_binary=convertToBinaryData("static/Trends.png")
                 quantity = Quantity_date.values
                 size = int(len(quantity) * 0.80)
                 train, test = quantity[0:size], quantity[size:len(quantity)]
                 #fit in model
                 predictions = arima_model(train, test)
         
+                cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
                 #plot graph
                 fig = plt.figure(figsize=(7.2,4.8),dpi=65)
                 plt.plot(test,label='Actual Price')
@@ -230,6 +273,7 @@ def enterticker():
                 plt.legend(loc=4)
                 plt.savefig('static/ARIMA.png')
                 plt.close(fig)
+                arima_binary=convertToBinaryData("static/ARIMA.png")
                 print()
                 print("##############################################################################")
                 arima_pred=predictions[-2]
@@ -238,7 +282,7 @@ def enterticker():
                 error_arima = math.sqrt(mean_squared_error(test, predictions))
                 print("ARIMA RMSE:",error_arima)
                 print("##############################################################################")
-                return arima_pred, error_arima
+                return arima_pred, error_arima, trend_binary, arima_binary
         def LSTM_ALGO(df):
             #Split data into training set and test set
             dataset_train=df.iloc[0:int(0.8*len(df)),:]
@@ -348,7 +392,7 @@ def enterticker():
             plt.savefig('static/LSTM.png')
             plt.close(fig)
             
-            
+            lstm_binary=convertToBinaryData("static/LSTM.png")
             error_lstm = math.sqrt(mean_squared_error(real_stock_price, predicted_stock_price))
             
             
@@ -364,7 +408,7 @@ def enterticker():
             print("Tomorrow's ",quote," Closing Price Prediction by LSTM: ",lstm_pred)
             print("LSTM RMSE:",error_lstm)
             print("##############################################################################")
-            return lstm_pred,error_lstm
+            return lstm_pred,error_lstm, lstm_binary
         def LIN_REG_ALGO(df):
             #No of days to be forcasted in future
             forecast_out = int(7)
@@ -411,27 +455,33 @@ def enterticker():
             plt2.legend(loc=4)
             plt2.savefig('static/LR.png')
             plt2.close(fig)
-            
+            lr_binary=convertToBinaryData("static/LR.png")
             error_lr = math.sqrt(mean_squared_error(y_test, y_test_pred))
             
             
             #Forecasting
+            
             forecast_set = clf.predict(X_to_be_forecasted)
             forecast_set=forecast_set*(1.04)
             mean=forecast_set.mean()
             lr_pred=forecast_set[0,0]
+            print(forecast_set)
             print()
             print("##############################################################################")
             print("Tomorrow's ",quote," Closing Price Prediction by Linear Regression: ",lr_pred)
             print("Linear Regression RMSE:",error_lr)
             print("##############################################################################")
-            return df, lr_pred, forecast_set, mean, error_lr
+            return df, lr_pred, forecast_set, mean, error_lr,lr_binary
                 
         #**************** SENTIMENT ANALYSIS **************************
-        def retrieving_tweets_polarity(symbol):
-            stock_ticker_map = pd.read_csv('Yahoo-Finance-Ticker-Symbols.csv')
-            stock_full_form = stock_ticker_map[stock_ticker_map['Ticker']==symbol]
-            symbol = stock_full_form['Name'].to_list()[0][0:12]
+        def retrieving_tweets_polarity(symbol1):
+            try:
+                stock_ticker_map = pd.read_csv('Yahoo-Finance-Ticker-Symbols.csv')
+                stock_full_form = stock_ticker_map[stock_ticker_map['Ticker']==symbol1]
+                symbol = stock_full_form['Name'].to_list()[0][0:12]
+
+            except:
+                symbol=symbol1
 
             auth = tweepy.OAuthHandler(ct.consumer_key, ct.consumer_secret)
             auth.set_access_token(ct.access_token, ct.access_token_secret)
@@ -445,6 +495,7 @@ def enterticker():
             #Count Positive, Negative to plot pie chart
             pos=0 #Num of pos tweets
             neg=1 #Num of negative tweets
+            c=0
             for tweet in tweets:
                 count=20 #Num of tweets to be displayed on web page
                 #Convert to Textblob format for assigning polarity
@@ -462,13 +513,13 @@ def enterticker():
                 #print(tw)
                 #Remove Emojis and Hindi Characters
                 tw=tw.encode('ascii', 'ignore').decode('ascii')
-
+                c+=1
                 #print("-------------------------------TWEET AFTER REMOVING NON ASCII CHARS-----------------------------")
                 #print(tw)
                 blob = TextBlob(tw)
                 polarity = 0 #Polarity of single individual tweet
                 for sentence in blob.sentences:
-                    
+
                     polarity += sentence.sentiment.polarity
                     if polarity>0:
                         pos=pos+1
@@ -490,6 +541,10 @@ def enterticker():
                 neg=neg+neutral
                 neutral=20
             print()
+            print(c)
+            if neg<0:
+                pos=pos+2*neg
+                neg=neg*-1
             print("##############################################################################")
             print("Positive Tweets :",pos,"Negative Tweets :",neg,"Neutral Tweets :",neutral)
             print("##############################################################################")
@@ -504,6 +559,7 @@ def enterticker():
             plt.tight_layout()
             plt.savefig('static/SA.png')
             plt.close(fig)
+            tweet_binary=convertToBinaryData("static/SA.png")
             #plt.show()
             if global_polarity>0:
                 print()
@@ -517,7 +573,7 @@ def enterticker():
                 print("Tweets Polarity: Overall Negative")
                 print("##############################################################################")
                 tw_pol="Overall Negative"
-            return global_polarity,tw_list,tw_pol,pos,neg,neutral
+            return global_polarity,tw_list,tw_pol,pos,neg,neutral,tweet_binary
 
 
         def recommending(df, global_polarity,today_stock,mean):
@@ -548,7 +604,8 @@ def enterticker():
         try:
             get_historical(quote)
         except:
-            return render_template('index.html',not_found=True)
+            msg="Invalid Stock Symbol"
+            return render_template('enterticker.html',msg=msg,not_found=True)
         else:
         
             #************** PREPROCESSUNG ***********************
@@ -568,34 +625,290 @@ def enterticker():
             
             quote_ratios = yf.Ticker(quote).info
             #print(quote_ratios)
-            
-            table(quote)
 
-            arima_pred, error_arima=ARIMA_ALGO(df)
-            lstm_pred, error_lstm=LSTM_ALGO(df)
-            df, lr_pred, forecast_set,mean,error_lr=LIN_REG_ALGO(df)
-            polarity,tw_list,tw_pol,pos,neg,neutral = retrieving_tweets_polarity(quote)
+            '''arima_pred, error_arima, trend_binary, arima_binary=ARIMA_ALGO(df)
+            lstm_pred, error_lstm, lstm_binary=LSTM_ALGO(df)
+            df, lr_pred, forecast_set,mean,error_lr,lr_binary=LIN_REG_ALGO(df)
+            polarity,tw_list,tw_pol,pos,neg,neutral,tweet_binary = retrieving_tweets_polarity(quote)
             
             idea, decision=recommending(df, polarity,today_stock,mean)
             print()
             print("Forecasted Prices for Next 7 days:")
             print(forecast_set)
-            today_stock=today_stock.round(2)
+            print(forecast_set.shape)
+            today_stock=today_stock.round(2)'''
             #return render_template('index.html')
-            return render_template('result.html',quote=quote,arima_pred=round(arima_pred,2),lstm_pred=round(lstm_pred,2),
+
+            end=datetime.now()
+            start = datetime(end.year,end.month,end.day)
+            start=start.strftime('%Y-%m-%d')
+            
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute('SELECT * FROM cache_pred WHERE quote = % s and date=%s', (quote,start,))
+            cache_pr = cursor.fetchone()
+            cursor.execute('SELECT * FROM cache_twitter WHERE quote = % s and date=%s', (quote,start,))
+            cache_tw = cursor.fetchone()
+            cursor.execute('SELECT * FROM images_pred WHERE quote = % s and date=%s', (quote,start,))
+            cache_ip = cursor.fetchone()
+            print("======================================================")
+            tw_list=[]
+            forecast_set=[]
+            if cache_pr!=None :
+                print("In cache")
+                arima_pred=cache_pr['arima_pred']
+                lstm_pred=cache_pr['lstm_pred']
+                lr_pred=cache_pr['lr_pred']
+                error_lr=cache_pr['error_lr']
+                error_lstm=cache_pr['error_lstm']
+                error_arima=cache_pr['error_arima']
+                for i in range(0,7):
+                    forecast_set.append([cache_pr['forecast'+str(i+1)]])
+                for i in range(0,12):
+                    tw_list.append(cache_tw['tweet'+str(i+1)])
+                idea=cache_tw['idea']
+                decision=cache_tw['decision']
+                tw_pol=cache_tw['tw_pol']
+                write_file(cache_ip['trends'], 'static/Trends.png')
+                write_file(cache_ip['arima'], 'static/ARIMA.png')
+                write_file(cache_ip['lstm'], 'static/LSTM.png')
+                write_file(cache_ip['lr'], 'static/LR.png')
+                write_file(cache_ip['tweet'], 'static/SA.png')
+                today_stock=today_stock.round(2)
+
+            else:
+                print("in else")
+                arima_pred, error_arima, trend_binary, arima_binary=ARIMA_ALGO(df)
+                lstm_pred, error_lstm, lstm_binary=LSTM_ALGO(df)
+                df, lr_pred, forecast_set,mean,error_lr,lr_binary=LIN_REG_ALGO(df)
+                polarity,tw_list,tw_pol,pos,neg,neutral,tweet_binary = retrieving_tweets_polarity(quote)
+                cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+                #cursor.execute('DELETE FROM cache_pred WHERE quote = % s ', (quote,))
+                #cursor.execute('DELETE FROM cache_twitter WHERE quote = % s ', (quote,))
+                #cursor.execute('DELETE FROM images_pred WHERE quote = % s ', (quote,))
+                cursor.execute('DELETE FROM cache_pred WHERE date <> % s ', (start,))
+                cursor.execute('DELETE FROM cache_twitter WHERE date <> % s ', (start,))
+                cursor.execute('DELETE FROM images_pred WHERE date <> % s ', (start,))
+                print("deleted")
+                mysql.connection.commit()
+                idea, decision=recommending(df, polarity,today_stock,mean)
+                print()
+                print("Forecasted Prices for Next 7 days:")
+                print(forecast_set)
+                today_stock=today_stock.round(2)
+                # cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+                arima_pred=round(arima_pred,2)
+                lstm_pred=round(lstm_pred,2)
+                lr_pred=round(lr_pred,2)
+                error_lr=round(error_lr,2)
+                error_lstm=round(error_lstm,2)
+                error_arima=round(error_arima,2)
+                tw_list=[i.encode('ascii', 'ignore').decode('ascii') for i in tw_list]
+                try:
+                    cursor.execute('INSERT INTO cache_pred VALUES (%s,%s, %s, %s, %s,%s, %s,%s, %s, %s, %s,%s, %s,%s,%s)', (quote,arima_pred,lstm_pred,lr_pred,error_lr,error_lstm,error_arima,forecast_set[0][0],forecast_set[1][0],forecast_set[2][0],forecast_set[3][0],forecast_set[4][0],forecast_set[5][0],forecast_set[6][0],start))
+                    cursor.execute('INSERT INTO cache_twitter VALUES (%s,%s, %s, %s, %s,%s, %s, %s, %s,%s,%s, %s, %s, %s,%s,%s, %s)', (quote,tw_pol,tw_list[0],tw_list[1],tw_list[2],tw_list[3],tw_list[4],tw_list[5],tw_list[6],tw_list[7],tw_list[8],tw_list[9],tw_list[10],tw_list[11],idea,decision,start))
+                    cursor.execute('INSERT INTO images_pred VALUES (%s,%s, %s, %s,%s,%s,%s)', (quote,arima_binary,lstm_binary,lr_binary,trend_binary,tweet_binary,start))
+                    mysql.connection.commit()
+                except:
+                    print("It was killed")
+
+            apple_df = pd.read_csv(''+quote+'.csv', index_col=0, parse_dates=True)
+            apple_df1=apple_df.iloc[-82:-1,:]
+            mc = fplt.make_marketcolors(up='tab:blue',down='tab:red',edge='lime',wick={'up':'blue','down':'red'},volume='lawngreen',)
+
+            s  = fplt.make_mpf_style(base_mpl_style="seaborn", marketcolors=mc, mavcolors=["yellow","orange","skyblue"])
+            fplt.plot(
+                apple_df1,
+                type="candle",
+                title='JAN-MAY',
+                ylabel='Price ($)',
+                mav=2,
+                figscale=2.0,
+                style=s,
+                savefig=dict(fname='static/candlestick.jpg',dpi=200,pad_inches=0.000001)
+            )
+            #set index
+            #dynamic Graph
+            figure = go.Figure(
+                data = [
+                    go.Candlestick(
+                        x = apple_df1.index,
+                        low = apple_df1.Low,
+                        high = apple_df1.High,
+                        close = apple_df1.Close,
+                        open = apple_df1.Open,
+                        increasing_line_color = 'deepskyblue',
+                        decreasing_line_color = 'darkorchid'
+                    )
+                ]
+            )
+            figure.update_layout(
+                title = quote+' Price',
+                yaxis_title = quote+" Stock Price",
+                xaxis_title = "Date (blue=up, purple=down)"
+            )
+
+            figure.write_html("templates\chart.html")
+            '''end=datetime.now()
+            start = datetime(end.year,end.month,end.day)
+            start=start.strftime('%Y-%m-%d')
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            quote=quote
+            arima_pred=round(arima_pred,2)
+            lstm_pred=round(lstm_pred,2)
+            lr_pred=round(lr_pred,2)
+            error_lr=round(error_lr,2)
+            error_lstm=round(error_lstm,2)
+            error_arima=round(error_arima,2)
+            tw_list=[i.encode('ascii', 'ignore').decode('ascii') for i in tw_list]
+            cursor.execute('INSERT INTO cache_pred VALUES (%s,%s, %s, %s, %s,%s, %s,%s, %s, %s, %s,%s, %s,%s,%s)', (quote,arima_pred,lstm_pred,lr_pred,error_lr,error_lstm,error_arima,forecast_set[0][0],forecast_set[1][0],forecast_set[2][0],forecast_set[3][0],forecast_set[4][0],forecast_set[5][0],forecast_set[6][0],start))
+            cursor.execute('INSERT INTO cache_twitter VALUES (%s,%s, %s, %s, %s,%s, %s, %s, %s,%s,%s, %s, %s, %s,%s,%s, %s, %s, %s,%s,%s, %s, %s, %s,%s)', (quote,tw_pol,tw_list[0],tw_list[1],tw_list[2],tw_list[3],tw_list[4],tw_list[5],tw_list[6],tw_list[7],tw_list[8],tw_list[9],tw_list[10],tw_list[11],tw_list[12],tw_list[13],tw_list[14],tw_list[15],tw_list[16],tw_list[17],tw_list[18],tw_list[19],idea,decision,start))
+            cursor.execute('INSERT INTO images_pred VALUES (%s,%s, %s, %s,%s,%s,%s)', (quote,arima_binary,lstm_binary,lr_binary,trend_binary,tweet_binary,start))
+            mysql.connection.commit()   
+            '''
+
+            
+            if quote_ratios['logo_url']==None or quote_ratios['logo_url']=='':
+                return render_template('resultBSE.html',quote=quote,arima_pred=round(arima_pred,2),lstm_pred=round(lstm_pred,2),
                                 lr_pred=round(lr_pred,2),open_s=today_stock['Open'].to_string(index=False),
                                 close_s=today_stock['Close'].to_string(index=False),adj_close=today_stock['Adj Close'].to_string(index=False),
                                 tw_list=tw_list,tw_pol=tw_pol,idea=idea,decision=decision,high_s=today_stock['High'].to_string(index=False),
-                                low_s=today_stock['Low'].to_string(index=False),vol=today_stock['Volume'].to_string(index=False), curr=str(quote_ratios['currency']),
-                                mc=str(quote_ratios['quoteType']),mrq=str(quote_ratios['mostRecentQuarter']),
-                                etr=str(quote_ratios['enterpriseToRevenue']), summary=str(quote_ratios['longBusinessSummary']),
-                                ss=str(quote_ratios['sharesShort']),pr=str(quote_ratios['profitMargins']),
+                                low_s=today_stock['Low'].to_string(index=False),vol=today_stock['Volume'].to_string(index=False),
                                 forecast_set=forecast_set,error_lr=round(error_lr,2),error_lstm=round(error_lstm,2),error_arima=round(error_arima,2))
-    return render_template('enterticker.html')
+            else:
+                return render_template('result.html',quote=quote,arima_pred=round(arima_pred,2),lstm_pred=round(lstm_pred,2),
+                                    lr_pred=round(lr_pred,2),open_s=today_stock['Open'].to_string(index=False),
+                                    close_s=today_stock['Close'].to_string(index=False),adj_close=today_stock['Adj Close'].to_string(index=False),
+                                    tw_list=tw_list,tw_pol=tw_pol,idea=idea,decision=decision,high_s=today_stock['High'].to_string(index=False),
+                                    low_s=today_stock['Low'].to_string(index=False),vol=today_stock['Volume'].to_string(index=False), curr=str(quote_ratios['currency']),
+                                    mc=str(quote_ratios['quoteType']),mrq=str(quote_ratios['mostRecentQuarter']),
+                                    etr=str(quote_ratios['enterpriseToRevenue']), summary=str(quote_ratios['longBusinessSummary']),
+                                    ss=str(quote_ratios['sharesShort']),pr=str(quote_ratios['profitMargins']),
+                                    forecast_set=forecast_set,error_lr=round(error_lr,2),error_lstm=round(error_lstm,2),error_arima=round(error_arima,2))
+    
 
+    try:
+        query = "SELECT symbol FROM history WHERE id='{userid}';".format(userid=user_id123)
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        symbols = []
+    except:
+        msg = ("Your session has expired")
+        return render_template('login.html', msg = msg)
+    try:
+        cursor.execute(query)
+        symbols = []
+        x = cursor.fetchall()
+        #print(x)
+        for i in x:
+            symbols.append(i['symbol'])
+            #print(i)
+            #print(type(i))
+        print(symbols)
+    except:
+        print("problem in sql query")
+    return render_template('enterticker.html',history_symbols=symbols)
+
+
+global user123
 @app.route('/stockpref', methods =['GET', 'POST'])
 def stockpref():
-    return render_template('stockpref.html')
+    try:
+        global user123
+        if user123:
+            session['stock1'] = user123['stock1']  
+            session['stock2'] = user123['stock2']
+            session['stock3'] = user123['stock3']
+            quote1=session['stock1']
+            quote2=session['stock2']
+            quote3=session['stock3']
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute('select symbol,count(symbol) from history group by symbol order by count(symbol) desc LIMIT 3')
+            symbol_sql=cursor.fetchall()
+            print(symbol_sql)
+            symbol_list=[]
+            if symbol_sql!=None :
+                symbol_list = [i['symbol'] for i in symbol_sql]
+            print(symbol_list)
+            if(quote1=='NA'):
+                if(len(symbol_list)==3):
+                    quote1=symbol_list[0]
+                else:
+                    quote1='GOOGL'
+            if(quote2=='NA'):
+                if(len(symbol_list)==3):
+                    quote2=symbol_list[1]
+                else:
+                    quote2='MSFT'
+            if(quote3=='NA'):
+                if(len(symbol_list)==3):
+                    quote3=symbol_list[2]
+                else:
+                    quote3='AAPL'
+
+        print(quote1,quote2,quote3)
+        quote_ratios1 = yf.Ticker(quote1).info
+        if quote_ratios1['logo_url']==None or quote_ratios1['logo_url']=='':
+            quote1='GOOGL'
+            quote_ratios1=yf.Ticker('GOOGL').info
+        quote_ratios2 = yf.Ticker(quote2).info
+        if quote_ratios2['logo_url']==None or quote_ratios2['logo_url']=='':
+            quote2:'MSFT'
+            quote_ratios2=yf.Ticker('MSFT').info
+        quote_ratios3 = yf.Ticker(quote3).info
+        if quote_ratios3['logo_url']==None or quote_ratios3['logo_url']=='':
+            quote3='ABT'
+            quote_ratios3=yf.Ticker('ABT').info
+        return render_template('stockpref.html', quote1=quote1, curr1=str(quote_ratios1['currency']),
+                                mc1=str(quote_ratios1['quoteType']),mrq1=str(quote_ratios1['mostRecentQuarter']),
+                                etr1=str(quote_ratios1['enterpriseToRevenue']), summary1=str(quote_ratios1['longBusinessSummary']),
+                                ss1=str(quote_ratios1['sharesShort']),pr1=str(quote_ratios1['profitMargins']), quote2=quote2, curr2=str(quote_ratios2['currency']),
+                                mc2=str(quote_ratios2['quoteType']),mrq2=str(quote_ratios2['mostRecentQuarter']),
+                                etr2=str(quote_ratios2['enterpriseToRevenue']), summary2=str(quote_ratios2['longBusinessSummary']),
+                                ss2=str(quote_ratios2['sharesShort']),pr2=str(quote_ratios2['profitMargins']), quote3=quote3, curr3=str(quote_ratios3['currency']),
+                                mc3=str(quote_ratios3['quoteType']),mrq3=str(quote_ratios3['mostRecentQuarter']),
+                                etr3=str(quote_ratios3['enterpriseToRevenue']), summary3=str(quote_ratios3['longBusinessSummary']),
+                                ss3=str(quote_ratios3['sharesShort']),pr3=str(quote_ratios3['profitMargins']))
+    except:
+        msg="There was a problem in fetching your stock preferences, please try again later"
+        return render_template('enterticker.html',msg=msg,not_found=True)
+
+
+@app.route('/updatestocks', methods =['GET', 'POST'])
+def updatestocks():
+    print("Entered us")
+    msg=''
+    if request.method == 'POST':
+        print("entered if")
+        email = request.form['email']
+        password = request.form['password']
+        stock1=request.form['stock1']
+        stock2=request.form['stock2']
+        stock3=request.form['stock3']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM userdetails WHERE email = % s', (email, ))
+        userdetails = cursor.fetchone()
+        if userdetails:
+            print('entered userdetails')
+            session['loggedin'] = True
+            session['id'] = userdetails['id']
+            session['email'] = userdetails['email']
+            cursor.execute("SELECT * FROM userstock WHERE id = '{id}'".format(id = session['id'],))
+            print('execute done')
+            userstock= cursor.fetchone()
+            userstock= cursor.fetchone()
+            query="UPDATE userstock SET stock1='{stock1}', stock2='{stock2}', stock3='{stock3}' WHERE id= '{id}'".format(stock1=stock1,stock2=stock2,stock3=stock3,id=session['id'],)
+            cursor.execute(query)
+            print(query)
+            mysql.connection.commit()
+            msg="Updated your preferences"
+            return render_template('updatestocks.html',msg=msg)
+        else:
+            msg = "Invalid email"
+    return render_template('updatestocks.html', msg = msg)
+
+@app.route('/chart')
+def chart():
+    return render_template('chart.html')
+
 
 @app.route('/login', methods =['GET', 'POST'])
 def login():
@@ -616,8 +929,9 @@ def login():
             return render_template('login.html',msg=msg)
 
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM userdetails WHERE email = % s AND password = % s', (email, password, ))
+        cursor.execute('SELECT * FROM userdetails WHERE email = % s', (email, ))
         userdetails = cursor.fetchone()
+
         if userdetails:
             session['loggedin'] = True
             session['id'] = userdetails['id']
@@ -625,101 +939,80 @@ def login():
             msg = 'Logged in successfully !'
             cursor.execute('SELECT * FROM userstock WHERE id = % s', (session['id'], ))
             userstock= cursor.fetchone()
-            if userstock:
-                session['stock1'] = userstock['stock1']  
-                session['stock2'] = userstock['stock2']
-                session['stock3'] = userstock['stock3']
-                quote1=session['stock1']
-                quote2=session['stock2']
-                quote3=session['stock3']          
-            quote_ratios1 = yf.Ticker(quote1).info
-            quote_ratios2 = yf.Ticker(quote2).info
-            quote_ratios3 = yf.Ticker(quote3).info
-            return render_template('stockpref.html', quote1=quote1, curr1=str(quote_ratios1['currency']),
-                                            mc1=str(quote_ratios1['quoteType']),mrq1=str(quote_ratios1['mostRecentQuarter']),
-                                            etr1=str(quote_ratios1['enterpriseToRevenue']), summary1=str(quote_ratios1['longBusinessSummary']),
-                                            ss1=str(quote_ratios1['sharesShort']),pr1=str(quote_ratios1['profitMargins']), quote2=quote2, curr2=str(quote_ratios2['currency']),
-                                            mc2=str(quote_ratios2['quoteType']),mrq2=str(quote_ratios2['mostRecentQuarter']),
-                                            etr2=str(quote_ratios2['enterpriseToRevenue']), summary2=str(quote_ratios2['longBusinessSummary']),
-                                            ss2=str(quote_ratios2['sharesShort']),pr2=str(quote_ratios2['profitMargins']), quote3=quote3, curr3=str(quote_ratios3['currency']),
-                                            mc3=str(quote_ratios3['quoteType']),mrq3=str(quote_ratios3['mostRecentQuarter']),
-                                            etr3=str(quote_ratios3['enterpriseToRevenue']), summary3=str(quote_ratios3['longBusinessSummary']),
-                                            ss3=str(quote_ratios3['sharesShort']),pr3=str(quote_ratios3['profitMargins']))
-            return render_template('enterticker.html')
+            global user123
+            user123=userstock
+            global user_id123
+            user_id123=userdetails['id']
+            return render_template('dashboard.html')
         else:
-            msg = ("Database error - user in firebase but not in database")
+            msg = ("Please register !")
     return render_template('login.html', msg = msg)
-  
+
+@app.route('/forgotpassword', methods =['GET', 'POST'])
+def forgotpassword():
+    msg = 'Please enter your registered email!'
+    print("In forgot password")
+    if request.method == 'POST' and 'email' in request.form:
+        print('In post method')
+        email = request.form['email']
+        auth.send_password_reset_email(email)
+        msg = 'Email sent, please check'
+    print("Out of post")
+    return render_template('forgotpassword.html',msg=msg)
+
 @app.route('/logout')
 def logout():
     session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('email', None)
-    return redirect(url_for('login'))
-  
-@app.route('/forgotpassword', methods =['GET', 'POST'])
-def forgotpassword():
-    msg = 'Please enter your registered email!'
-    if request.method == 'POST':
-        try:
-            email = request.form['email']
-            auth.send_password_reset_email(email)
-            msg = 'Email sent, please check'
-        except:
-            msg = "This email has not been registered!"
-    return render_template('forgotpassword.html',msg=msg)
+    return redirect(url_for('index'))
 
   
 @app.route('/register', methods =['GET', 'POST'])
 def register():
     msg = ''
-    if request.method == 'POST' and 'email' in request.form and 'username' in request.form and 'password' in request.form:
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         email = request.form['email']
-        username = request.form['username']
         password=request.form['password']
         firstname = request.form['firstname']
         lastname = request.form['lastname']
-        mobile=request.form['mobile']
         address=request.form['address']
         stock1=request.form['stock1']
         stock2=request.form['stock2']
         stock3=request.form['stock3']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        
-        #check if password has ->
+
+         #check if password has ->
         #   1. At least 8 chars 
                 # NOT DOING ->
                 #   2. At least one numeric    
                 #   3. At least one alphabet
                 #   4. At least one uppercase
-        
+
         if len(password)<8:
             msg = "Have a password greater than 8 characters!"
             return render_template('register.html', msg = msg)
-          
-        if len(mobile) != 10:
-            msg = "Make sure your phone number is 10 digits long!"
-            return render_template('register.html', msg = msg)
 
-        #register on firebase
+            
+
+
         try:
             user = auth.create_user_with_email_and_password(email,password)
             auth.send_email_verification(user['idToken'])
-            print("Please go to your email to verify :)")
             print("Done!")
+            msg = 'Please go to your email to verify :)'
         except:
             print("Can't do that right now")
+            msg = 'There was some problem, please try again :('
     
         print("TEST")
-        cursor.execute('INSERT INTO userdetails VALUES (NULL, % s, % s, % s, %s, %s, %s, %s)', (email, username, password,firstname, lastname, mobile, address))
-        mysql.connection.commit()
+        cursor.execute('INSERT INTO userdetails VALUES (NULL, %s, %s, %s, %s)', (email,firstname, lastname, address))
         cursor.execute('INSERT INTO userstock VALUES (NULL, % s, % s, % s)', (stock1, stock2, stock3))
         mysql.connection.commit()
-        msg = 'You have successfully registered !'
+        
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
     return render_template('register.html', msg = msg)
-  
 
 if __name__=="__main__":
     app.run(debug=True)

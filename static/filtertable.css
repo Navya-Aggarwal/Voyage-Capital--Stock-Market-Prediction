@@ -1,0 +1,41 @@
+table{
+  text-align: center;
+}
+
+a, h2       { color: #377ba8; }
+h2          { margin: 0; }             
+h2              { font-size: 1.2em; }
+
+
+input{
+  height: 40px;
+  width: 500px;
+  margin: 40px;
+}
+
+body{
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  margin: auto;
+  padding-top: 10px;
+
+}
+tr:nth-child(odd){
+  background-color:#eee; 
+}
+tr:nth-child(even)	{ 
+  background-color:#fff; 
+}
+
+tr:hover{
+   background-color: plum;
+}
+
+table.dataframe, .dataframe th, .dataframe td {
+  border: none;
+  border-bottom: 1px solid #C8C8C8;
+  border-collapse: collapse;
+  text-align:left;
+  padding: 10px;
+  margin-bottom: 40px;
+  font-size: 1em;
+}

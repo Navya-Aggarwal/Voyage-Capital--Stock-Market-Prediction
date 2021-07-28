@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Index-About Us</title>
+    <meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='Voyage Capital-logos_black.png') }}">
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin='anonymous'></script>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='font-awesome.min.css')}}">
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='animate.css')}}">
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='hamburgers.min.css')}}">
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='select2.min.css')}}">
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='util.css')}}">
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
+    <!--===============================================================================================-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <!--===============================================================================================-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='aboutus.css')}}">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  	  <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="{{url_for('static', filename='Voyage Capital-logos_black_VC.png')}}" width="50" height="40" alt="">
+        </a>
+  	    <a class="navbar-brand" href="{{ url_for( 'index' ) }}">VOYAGE CAPITAL</a>
+  	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  	      <span class="navbar-toggler-icon"></span>
+  	    </button>
+  	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  					<li class="nav-item dropdown">
+  	          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  	              REGISTER/LOGIN
+  	          </a>
+  	          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+  	            <li><a class="dropdown-item" href="{{ url_for( 'login' ) }}">ALREADY A USER</a></li>
+  	            <li><a class="dropdown-item" href="{{ url_for( 'register' ) }}">NEW USER</a></li>
+  	            <li><a class="dropdown-item" href="{{ url_for( 'index' ) }}">HOME PAGE</a></li>
+  	          </ul>
+  	        </li>
+  	        <li class="nav-item">
+  	          <a class="nav-link active" aria-current="page" href="{{ url_for( 'indexaboutus' ) }}">ABOUT US</a>
+  	        </li>
+  	        <li class="nav-item">
+  	          <a class="nav-link" href="{{ url_for( 'indexfaq' ) }}">FAQ</a>
+  	        </li>
+  	      </ul>
+  	    </div>
+  	  </div>
+  	</nav>
+
+  	<div class="limiter">
+  		<div class="container-login100">
+  			<div class="wrap-login100">
+  				<div class="login100-pic js-tilt" data-tilt>
+  					<img src="https://img.etimg.com/thumb/width-1200,height-900,imgsize-198498,resizemode-1,msid-75881213/markets/stocks/news/why-iex-icici-securities-and-bharti-airtel-bloomed-amid-the-broader-gloom.jpg" alt="IMG">
+            <br>
+            <br>
+            <img src="https://www.thebalance.com/thmb/lvJVPuSqDSOYmBskOyMWCrnWXxQ=/4740x3554/filters:fill(auto,1)/decreasing-line-graph-on-stock-market-trading-screen-598776121-5750e4b05f9b5892e8ca9584.jpg" alt="IMG">
+            <br>
+            <br>
+            <img src="https://api.time.com/wp-content/uploads/2020/02/zoom-zm-stocks-coronavirus.jpg" alt="IMG">
+  				</div>
+
+  				<form class="login100-form validate-form" style="    width: 60% !important;">
+  					<span class="login100-form-title">
+              <h1>ABOUT US</h1>
+              <br>
+              <h5>Voyage Capital</h5>
+              <br>
+  						<p>New investors may not know about the hidden risks in many seemingly simple investment strategies. To combat this pitfall, it’s important to be as informed as possible. Through our project Voyage Capital we aim to provide investors with accurate data regarding stocks and stock market that will benefit them and help them make well informed decisions. The user is supposed to sign up through ID and password or login through existing Gmail. The site will provide information related to stocks and also offer predictions regarding stocks i.e. what is the recent trend and fluctuations in stocks. It plans to do so by analysing stock market parameters such as market Price to Book value ratio. It also provides with a news feature wherein recent news related to stocks will be given. We plan on utilizing tools such as Database Management System, Structured Query Language, Front and Back end development and machine learning. In today’s volatile market which offers myriads of seemingly lucrative “Money Minters”, choose Voyage Capital to help you in making informed and profitable investments.</p>
+  					</span>
+
+
+
+  					<div class="container-login100-form-btn">
+  						<button class="login100-form-btn btn-dark">
+  							<a href="{{ url_for('index') }}" class="text-white" >	GO TO HOMEPAGE</a>
+  						</button>
+              <div class='social'>
+                <!--icons-->
+                <a href='#'><i class="fab fa-facebook"></i></a>
+                <a href='#'><i class="fab fa-twitter"></i></a>
+                <a href='https://www.instagram.com/voyage_capital/' target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+  					</div>
+  				</form>
+  			</div>
+  		</div>
+  	</div>
+
+
+
+
+    <!--===============================================================================================-->
+    <script src="{{url_for('static', filename='jquery-3.2.1.min.js')}}"></script>
+    <!--===============================================================================================-->
+      <script src="{{url_for('static', filename='popper.js')}}"></script>
+      <script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+    <!--===============================================================================================-->
+      <script src="{{url_for('static', filename='select2.min.js')}}"></script>
+    <!--===============================================================================================-->
+      <script src="{{url_for('static', filename='tilt.jquery.min.js')}}"></script>
+    <script >
+      $('.js-tilt').tilt({
+        scale: 1.1
+      })
+    </script>
+    <!--===============================================================================================-->
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+
+  </body>
+</html>
